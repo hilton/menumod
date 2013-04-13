@@ -22,9 +22,12 @@ object Application extends Controller {
     Redirect(routes.Application.show(menu.uuid))
   }
 
+  /**
+   * Form definition: the UUID field is ignored, because the action replaces the value from the URL.
+   */
   val menuForm = Form(
     mapping(
-      "uuid" -> text,
+      "uuid" -> ignored(""),
       "title" -> text
     )(Menu.apply)(Menu.unapply)
   )
@@ -33,7 +36,8 @@ object Application extends Controller {
    * Saves changes to a menu.
    */
   def save(uuid: String) = Action { implicit request =>
-    Menu.update(menuForm.bindFromRequest.get)
+    val menu = menuForm.bindFromRequest.get.copy(uuid = uuid)
+    Menu.update(menu)
     Redirect(routes.Application.show(uuid))
   }
 

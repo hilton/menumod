@@ -10,7 +10,7 @@ import play.api.Logger
 /**
  * A cafe menu.
  */
-case class Menu(uuid: String, title: String = "")
+case class Menu(uuid: String = UUID.randomUUID().toString, title: String = "")
 
 /**
  * Cafe menu data access layer.
@@ -28,7 +28,7 @@ object Menu {
    * Creates a new menu.
    */
   def create: Menu = {
-    val menu = Menu(UUID.randomUUID().toString  )
+    val menu = Menu()
     val menus = mongoClient("menumod")("menus")
     menus.insert(JSON.parse(Json.toJson(menu).toString).asInstanceOf[DBObject])
     menu
