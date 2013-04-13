@@ -1,0 +1,7 @@
+GET /      controllers.Application.index
+GET /new   controllers.Application.create
+
+GET  /$uuid<[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}>   controllers.Application.show(uuid: String)
+POST /$uuid<[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}>   controllers.Application.save(uuid: String)
+
+GET /assets/*file               controllers.Assets.at(path="/public", file)

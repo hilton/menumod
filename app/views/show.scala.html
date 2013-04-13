@@ -1,0 +1,13 @@
+@(menu: models.Menu)
+@import org.joda.time.format.DateTimeFormat
+
+@main(menu.title) {
+  <nav><a href="@routes.Application.index">Home</a></nav>
+
+  <form method="post" action="@routes.Application.save(menu.uuid)">
+    <input type="hidden" name="uuid" value="@menu.uuid">
+    <p><input class="title" placeholder="Menu title" name="title" value="@menu.title"></p>
+
+    <p><button type="submit">Save Changes</button></p>
+  </form>
+}

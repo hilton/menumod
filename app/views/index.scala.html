@@ -1,0 +1,15 @@
+@(currentUUID: String)
+
+@main("Start") {
+    
+  <h1>MenuMod</h1>
+
+  <p>
+    <a class="button" href="@routes.Application.create">Create New Menu</a>
+
+  @if(!currentUUID.isEmpty) {
+    <a class="button" href="@routes.Application.show(currentUUID)">Edit Current Menu</a>
+  }
+
+  </p>
+}

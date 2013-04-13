@@ -1,0 +1,44 @@
+body {
+ font-family: "Helvetica Neue", sans-serif;
+ padding-left: 4em;
+}
+
+nav a {
+ color: #090;
+ text-decoration: none;
+ text-transform: uppercase;
+}
+
+nav a:hover {
+ text-decoration: underline;
+}
+
+h1 {
+ font-weight: normal;
+ font-size: 445%;
+ margin: 0;
+}
+
+.button, button {
+ background-color: white;
+ color: #090;
+ border: solid 2px #090;
+ padding: 0.3em 0.5em;
+ border-radius: 8px;
+ text-decoration: none;
+ margin-right: 1em;
+}
+
+.button:hover, button:hover {
+ color: white;
+ background-color: #090;
+}
+
+button {
+ font-size: 100%;
+}
+
+input.title {
+ font-size: 200%;
+}
+
