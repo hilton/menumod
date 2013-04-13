@@ -9,7 +9,7 @@ import play.api.Logger
 object Application extends Controller {
 
   def index = Action { request =>
-    val currentMenuUUID = request.cookies("MenuMod").value
+    val currentMenuUUID = request.cookies.get("MenuMod").map(_.value).getOrElse("")
     Logger.debug("current menu = %s" format currentMenuUUID)
     Ok(views.html.index(currentMenuUUID))
   }
