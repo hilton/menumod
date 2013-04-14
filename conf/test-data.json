@@ -1,0 +1,32 @@
+[
+  {
+    "uuid": "ab016e21-3eed-404c-b587-f9fe749ab22c",
+    "title": "Memory Lane",
+    "dishes": [
+      {
+        "name": "Zalm, biet, rettich",
+        "price": "€6.50"
+      } ,
+      {
+        "name": "Paté gans, chutney",
+        "price": "€6.50"
+      } ,
+      {
+        "name": "Cecina de León",
+        "price": "€6.50"
+      } ,
+      {
+        "name": "Terrine aubergine",
+        "price": "€6.50"
+      } ,
+      {
+        "name": "Garnaal, avocado, basilicum",
+        "price": "€6.50"
+      } ,
+      {
+        "name": "Boerenboter, jam",
+        "price": "€6.50"
+      }
+    ]
+  }
+]

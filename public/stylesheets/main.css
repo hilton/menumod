@@ -3,8 +3,11 @@ body {
  padding-left: 4em;
 }
 
-nav a {
+a {
  color: #090;
+}
+
+nav a {
  text-decoration: none;
  text-transform: uppercase;
 }
@@ -23,8 +26,22 @@ nav a:hover {
 
 h1 {
  font-weight: normal;
- font-size: 445%;
+ font-size: 446%;
  margin: 0;
+}
+
+h2 {
+ margin-top: 3em;
+ font-weight: normal;
+}
+
+ul {
+ padding-left: 0;
+}
+
+li {
+ list-style-type: square;
+ color: #090;
 }
 
 fieldset {
@@ -63,6 +80,6 @@ input.title {
  width: 100%;
 }
 
-input.dish {
+input.name {
  width: 40em;
 }

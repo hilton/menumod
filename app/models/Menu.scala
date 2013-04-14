@@ -5,18 +5,14 @@ import java.util.UUID
 import play.api.libs.json._
 import play.api.libs.functional.syntax._
 import com.mongodb.util.JSON
-import play.api.Logger
+import play.api.{Play, Logger}
+import java.io.File
+import play.api.libs.Files
 
 /**
  * A cafe menu.
  */
-//case class Menu(uuid: String = UUID.randomUUID().toString, title: String = "", dishes: List[Dish] = List.empty)
-case class Menu(uuid: String = UUID.randomUUID().toString, title: String = "", dishes: List[String] = List.empty)
-
-/**
- * A dish or drink on a menu.
- */
-case class Dish(name: String, price: String)
+case class Menu(uuid: String = UUID.randomUUID().toString, title: String = "", dishes: List[Dish] = List.empty)
 
 /**
  * Cafe menu data access layer.
@@ -29,30 +25,17 @@ object Menu {
 
   val menuReads: Reads[Menu] = (
     (JsPath \ "uuid").read[String] and
-    (JsPath \ "title").read[String] and
-//    (JsPath \ "dishes").read( list[Dish](dishReads) )
-    (JsPath \ "dishes").read[List[String]]
+      (JsPath \ "title").read[String] and
+      (JsPath \ "dishes").read( list[Dish](Dish.dishReads) )
     )(Menu.apply _)
-
-  val dishReads: Reads[Dish] = (
-    (JsPath \ "name").read[String] and
-    (JsPath \ "price").read[String]
-    )(Dish.apply _)
 
   import play.api.libs.json.Writes._
 
   val menuWrites: Writes[Menu] = (
     (JsPath \ "uuid").write[String] and
-    (JsPath \ "title").write[String] and
-//    (JsPath \ "dishes").write(Writes.traversableWrites[Dish](dishWrites))
-    (JsPath \ "dishes").write(Writes.traversableWrites[String])
+      (JsPath \ "title").write[String] and
+      (JsPath \ "dishes").write(Writes.traversableWrites[Dish](Dish.dishWrites))
     )(unlift(Menu.unapply))
-
-  val dishWrites: Writes[Dish] = (
-    (JsPath \ "name").write[String] and
-    (JsPath \ "price").write[String]
-    )(unlift(Dish.unapply))
-
 
   implicit val menuFormat: Format[Menu] = Format(menuReads, menuWrites)
 
@@ -67,6 +50,14 @@ object Menu {
   }
 
   /**
+   * Deletes all menus.
+   */
+  def deleteAll() = {
+    val menus = mongoClient("menumod")("menus")
+    menus.drop()
+  }
+
+  /**
    * Fetches the menu with the given UUID.
    */
   def find(uuid: String): Option[Menu] = {
@@ -77,6 +68,19 @@ object Menu {
       Logger.debug("menu = %s" format json)
       Json.parse(json).as[Menu]
     }
+  }
+
+  /**
+   * Loads menu data from a JSON file.
+   */
+  def load(file: File) {
+    val jsonList = Json.parse(Files.readFile(file)).as[List[JsValue]]
+    val documents = jsonList.map(menu => JSON.parse(menu.toString).asInstanceOf[DBObject])
+
+//    import scala.collection.JavaConverters._
+    val menus = mongoClient("menumod")("menus")
+    val result = menus.insert(documents: _*)
+    Logger.debug("result %s" format result)
   }
 
   /**

@@ -22,6 +22,11 @@ object Application extends Controller {
     Redirect(routes.Application.show(menu.uuid))
   }
 
+  val dishMapping = mapping(
+    "name" -> text,
+    "price" -> optional(text)
+  )(Dish.apply)(Dish.unapply)
+
   /**
    * Form definition: the UUID field is ignored, because the action replaces the value from the URL.
    */
@@ -29,22 +34,22 @@ object Application extends Controller {
     mapping(
       "uuid" -> ignored(""),
       "title" -> text,
-      "dishes" -> list(text)
+      "dishes" -> list(dishMapping)
     )(Menu.apply)(Menu.unapply)
   )
 
-  val dishMapping = mapping(
-    "name" -> text,
-    "price" -> text
-  )(Dish.apply)(Dish.unapply)
-
   /**
    * Saves changes to a menu.
+   *
    */
   def save(uuid: String) = Action { implicit request =>
-    val menu = menuForm.bindFromRequest.get.copy(uuid = uuid)
-    Menu.update(menu)
-    Redirect(routes.Application.show(uuid))
+    menuForm.bindFromRequest.fold(
+      form => BadRequest(form.errorsAsJson.toString).as("application/json"),
+      menu => {
+        Menu.update(menu.copy(uuid = uuid))
+        Redirect(routes.Application.show(uuid))
+      }
+    )
   }
 
   /**
@@ -54,7 +59,7 @@ object Application extends Controller {
     Menu.find(uuid).map { menu =>
       Ok(views.html.show(menu)).withCookies(Cookie("MenuMod", uuid))
     }.getOrElse {
-      NotFound
+      NotFound("Menu does not exist")
     }
   }
 }

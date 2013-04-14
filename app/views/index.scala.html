@@ -2,7 +2,7 @@
 
 @main("Start") {
     
-  <h1>MenuMod</h1>
+  <h1>menumod</h1>
 
   <p>
     <a class="button" href="@routes.Application.create">Create New Menu</a>
@@ -10,6 +10,11 @@
   @if(!currentUUID.isEmpty) {
     <a class="button" href="@routes.Application.show(currentUUID)">Edit Current Menu</a>
   }
-
   </p>
+
+  <h2>test data</h2>
+
+  <ul>
+    <li><a href="/ab016e21-3eed-404c-b587-f9fe749ab22c">Memory Lane</a></li>
+  </ul>
 }

@@ -9,8 +9,9 @@
     <p><input class="title" placeholder="Menu title" name="title" value="@menu.title"></p>
 
     @for((dish, index) <- menu.dishes.zipWithIndex) {
-      <p>
-        <input class="dish" placeholder="Drink or dish" name="dishes[@index]" value="@dish">
+      <p class="dish">
+        <input class="name" placeholder="Drink or dish" name="dishes[@index].name" value="@dish.name">
+        <input class="price" placeholder="Price " name="dishes[@index].price" value="@dish.price">
         <a class="delete action" href="#">delete</a>
       </p>
     }
@@ -20,8 +21,9 @@
   </form>
 
   <section class="templates">
-    <p id="dish_template">
-      <input class="dish" placeholder="Drink or dish">
+    <p id="dish_template" class="dish">
+      <input class="name" placeholder="Drink or dish" name="dishes[0].name">
+      <input class="price" placeholder="Price" name="dishes[0].price">
       <a class="delete action" href="#">delete</a>
     </p>
   </section>
