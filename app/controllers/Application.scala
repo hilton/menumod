@@ -1,8 +1,8 @@
 package controllers
 
 import play.api.mvc._
-import models.Menu
-import play.api.data.Form
+import models.{Dish, Menu}
+import play.api.data.{Mapping, Form}
 import play.api.data.Forms._
 import play.api.Logger
 
@@ -28,9 +28,15 @@ object Application extends Controller {
   val menuForm = Form(
     mapping(
       "uuid" -> ignored(""),
-      "title" -> text
+      "title" -> text,
+      "dishes" -> list(text)
     )(Menu.apply)(Menu.unapply)
   )
+
+  val dishMapping = mapping(
+    "name" -> text,
+    "price" -> text
+  )(Dish.apply)(Dish.unapply)
 
   /**
    * Saves changes to a menu.

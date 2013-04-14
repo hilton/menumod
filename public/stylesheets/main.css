@@ -13,6 +13,10 @@ nav a:hover {
  text-decoration: underline;
 }
 
+.content {
+ width: 40em;
+}
+
 h1 {
  font-weight: normal;
  font-size: 445%;
@@ -40,5 +44,9 @@ button {
 
 input.title {
  font-size: 200%;
+ width: 100%;
 }
 
+input.dish {
+ width: 40em;
+}
