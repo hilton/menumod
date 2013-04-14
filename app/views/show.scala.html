@@ -5,11 +5,24 @@
   <nav><a href="@routes.Application.index">Home</a></nav>
 
   <form method="post" action="@routes.Application.save(menu.uuid)">
+
     <p><input class="title" placeholder="Menu title" name="title" value="@menu.title"></p>
+
     @for((dish, index) <- menu.dishes.zipWithIndex) {
-      <p><input class="dish" placeholder="Drink or dish" name="dishes[@index]" value="@dish"></p>
+      <p>
+        <input class="dish" placeholder="Drink or dish" name="dishes[@index]" value="@dish">
+        <a class="delete action" href="#">delete</a>
+      </p>
     }
-    <p><input class="dish" placeholder="Drink or dish" name="dishes[@menu.dishes.size]"></p>
+    <p><a class="add action" href="#">add dish</a></p>
+
     <p><button type="submit">Save Changes</button></p>
   </form>
+
+  <section class="templates">
+    <p id="dish_template">
+      <input class="dish" placeholder="Drink or dish">
+      <a class="delete action" href="#">delete</a>
+    </p>
+  </section>
 }

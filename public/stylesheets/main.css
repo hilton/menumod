@@ -17,10 +17,26 @@ nav a:hover {
  width: 40em;
 }
 
+.templates {
+ display: none;
+}
+
 h1 {
  font-weight: normal;
  font-size: 445%;
  margin: 0;
+}
+
+fieldset {
+ border: dashed 1px #090;
+ margin: 0;
+}
+
+.action {
+ color: #090;
+ text-decoration: none;
+ text-transform: uppercase;
+ font-size: 90%;
 }
 
 .button, button {
