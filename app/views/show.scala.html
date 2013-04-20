@@ -8,23 +8,47 @@
 
     <p><input class="title" placeholder="Menu title" name="title" value="@menu.title"></p>
 
-    @for((dish, index) <- menu.dishes.zipWithIndex) {
-      <p class="dish">
-        <input class="name" placeholder="Drink or dish" name="dishes[@index].name" value="@dish.name">
-        <input class="price" placeholder="Price " name="dishes[@index].price" value="@dish.price">
-        <a class="delete action" href="#">delete</a>
-      </p>
-    }
-    <p><a class="add action" href="#">add dish</a></p>
+    @for((section, sectionIndex) <- menu.sections.zipWithIndex) {
+      <fieldset class="section">
+        <p class="section">
+          <input class="title" placeholder="Section title" name="sections[@sectionIndex].title" value="@section.title">
+          <input class="price" placeholder="Prices" name="sections[@sectionIndex].price" value="@section.price">
+        </p>
 
-    <p><button type="submit">Save Changes</button></p>
+        @for((dish, dishIndex) <- section.dishes.zipWithIndex) {
+          <p class="dish">
+            <input class="name" placeholder="Drink or dish" name="sections[@sectionIndex].dishes[@dishIndex].name" value="@dish.name">
+            <input class="price" placeholder="Price" name="sections[@sectionIndex].dishes[@dishIndex].price" value="@dish.price">
+            <a class="delete-dish action" href="#">delete</a>
+          </p>
+        }
+        <p>
+          <a class="add-dish action" href="#">add dish</a>
+          <a class="delete-section action" href="#">delete section</a>
+        </p>
+      </fieldset>
+    }
+    <p>
+      <a class="add-section action" href="#">add section</a>
+    </p>
+
+    <p><button type="submit">Save Changes</button> <a class="cancel action" href="">cancel</a></p>
   </form>
 
   <section class="templates">
     <p id="dish_template" class="dish">
       <input class="name" placeholder="Drink or dish" name="dishes[0].name">
       <input class="price" placeholder="Price" name="dishes[0].price">
-      <a class="delete action" href="#">delete</a>
+      <a class="delete-dish action" href="#">delete</a>
     </p>
+
+    <fieldset id="section_template" class="section">
+      <p class="section">
+        <input class="title" placeholder="Section title" name="sections[0].title">
+        <input class="price" placeholder="Prices" name="sections[0].price">
+      </p>
+      <p><a class="add-dish action" href="#">add dish</a></p>
+    </fieldset>
+
   </section>
 }

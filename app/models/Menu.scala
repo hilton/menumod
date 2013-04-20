@@ -12,7 +12,7 @@ import play.api.libs.Files
 /**
  * A cafe menu.
  */
-case class Menu(uuid: String = UUID.randomUUID().toString, title: String = "", dishes: List[Dish] = List.empty)
+case class Menu(uuid: String = UUID.randomUUID().toString, title: String = "", sections: List[Section] = List.empty)
 
 /**
  * Cafe menu data access layer.
@@ -26,7 +26,7 @@ object Menu {
   val menuReads: Reads[Menu] = (
     (JsPath \ "uuid").read[String] and
       (JsPath \ "title").read[String] and
-      (JsPath \ "dishes").read( list[Dish](Dish.dishReads) )
+      (JsPath \ "sections").read( list[Section](Section.sectionReads) )
     )(Menu.apply _)
 
   import play.api.libs.json.Writes._
@@ -34,7 +34,7 @@ object Menu {
   val menuWrites: Writes[Menu] = (
     (JsPath \ "uuid").write[String] and
       (JsPath \ "title").write[String] and
-      (JsPath \ "dishes").write(Writes.traversableWrites[Dish](Dish.dishWrites))
+      (JsPath \ "sections").write(Writes.traversableWrites[Section](Section.sectionWrites))
     )(unlift(Menu.unapply))
 
   implicit val menuFormat: Format[Menu] = Format(menuReads, menuWrites)
@@ -65,7 +65,7 @@ object Menu {
     val result = menus.findOne(MongoDBObject("uuid" -> uuid))
     result map { menu =>
       val json = JSON.serialize(menu).toString
-      Logger.debug("menu = %s" format json)
+      Logger.debug("Menu.find:\n\n%s\n" format json)
       Json.parse(json).as[Menu]
     }
   }

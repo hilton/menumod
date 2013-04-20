@@ -1,7 +1,7 @@
 package controllers
 
 import play.api.mvc._
-import models.{Dish, Menu}
+import models.{Section, Dish, Menu}
 import play.api.data.{Mapping, Form}
 import play.api.data.Forms._
 import play.api.Logger
@@ -27,6 +27,14 @@ object Application extends Controller {
     "price" -> optional(text)
   )(Dish.apply)(Dish.unapply)
 
+
+  val sectionMapping = mapping(
+    "title" -> optional(text),
+    "price" -> optional(text),
+    "dishes" -> list(dishMapping)
+  )(Section.apply)(Section.unapply)
+
+
   /**
    * Form definition: the UUID field is ignored, because the action replaces the value from the URL.
    */
@@ -34,7 +42,7 @@ object Application extends Controller {
     mapping(
       "uuid" -> ignored(""),
       "title" -> text,
-      "dishes" -> list(dishMapping)
+      "sections" -> list(sectionMapping)
     )(Menu.apply)(Menu.unapply)
   )
 
@@ -46,6 +54,7 @@ object Application extends Controller {
     menuForm.bindFromRequest.fold(
       form => BadRequest(form.errorsAsJson.toString).as("application/json"),
       menu => {
+        Logger.debug("Application.save:\n\n%s\n" format menu)
         Menu.update(menu.copy(uuid = uuid))
         Redirect(routes.Application.show(uuid))
       }
