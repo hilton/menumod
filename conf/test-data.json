@@ -1,5 +1,55 @@
 [
   {
+    "uuid": "9d415c43-565a-45bb-a006-1c8026074e52",
+    "title": "UEB West",
+    "dishes": [
+      {
+        "name": "tostie urban special: prosciutto, oude kaas, zure groenten, rode paprika en sla",
+        "price": "4.75"
+      },
+      {
+        "name": "tostie aardappel, olijventapenade, oude kaas en sla",
+        "price": "4.75"
+      },
+      {
+        "name": "tostie met oude kaas",
+        "price": "3.25"
+      },
+      {
+        "name": "tostie met oude kaas en achterham",
+        "price": "4.25"
+      },
+      {
+        "name": "stokbrood met prosciutto ham",
+        "price": "3.50"
+      },
+      {
+        "name": "stokbrood met oude kaas",
+        "price": "3.50"
+      },
+      {
+        "name": "bruschetta geitenkaas met gamarineerde rode biet, gerootsterde walnoot en mesclun sla",
+        "price": "6.75"
+      },
+      {
+        "name": "bruschetta huisgerookte zalm met komkommer, mesclun sla en dille creme fraiche",
+        "price": "6.75"
+      },
+      {
+        "name": "warme bruschetta tuinbonenmash met wilde spinazie en bimi",
+        "price": "6.75"
+      },
+      {
+        "name": "warme bruschetta aubergine, kruidige tomatenpuree en peccorino kaas",
+        "price": "6.75"
+      },
+      {
+        "name": "lamsworst met Marokkaanse worteldip geserveerd met zuurdesembrood",
+        "price": "6.75"
+      }
+    ]
+  },
+  {
     "uuid": "ab016e21-3eed-404c-b587-f9fe749ab22c",
     "title": "Memory Lane",
     "dishes": [
