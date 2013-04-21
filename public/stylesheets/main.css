@@ -44,19 +44,24 @@ li {
  color: #090;
 }
 
+fieldset, input {
+ border: none;
+}
+
 fieldset {
- border: dashed 1px #090;
+ border-bottom: 1px solid #090;
  margin: 0;
+ padding: 10px 0;
 }
 
 input {
  font-size: 90%;
- border: none;
- background: #e8f8e8;
+ border-bottom: 1px dashed #090;
+ margin-right: 10px;
 }
 
 .action {
- margin-right: 2em;
+ margin: 0 1em;
  color: #090;
  text-decoration: none;
  text-transform: uppercase;
@@ -92,15 +97,16 @@ p.section input {
 }
 
 p.section input.title {
+ font-weight: bold;
  width: 30em;
 }
 
 input.price {
- width: 5em;
+ width: 4em;
 }
 
 p.section input.price {
- width: 3.9em;
+ width: 3em;
 }
 
 input.name {
